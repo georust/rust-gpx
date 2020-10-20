@@ -6,7 +6,7 @@ use error_chain::{bail, ensure};
 use xml::reader::XmlEvent;
 
 use crate::errors::*;
-use crate::parser::{link, string, tracksegment, verify_starting_tag, Context};
+use crate::parser::{extensions, link, string, tracksegment, verify_starting_tag, Context};
 use crate::Track;
 
 /// consume consumes a GPX track from the `reader` until it ends.
@@ -48,6 +48,9 @@ pub fn consume<R: Read>(context: &mut Context<R>) -> Result<Track> {
                 }
                 "link" => {
                     track.links.push(link::consume(context)?);
+                }
+                "extensions" => {
+                    extensions::consume(context)?;
                 }
                 child => {
                     bail!(ErrorKind::InvalidChildElement(String::from(child), "track"));
