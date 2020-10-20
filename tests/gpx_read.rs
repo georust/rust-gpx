@@ -302,7 +302,10 @@ fn gpx_reader_read_test_caltopo_export() -> Result<(), Box<dyn Error>> {
     assert_eq!(segment.points.len(), 3);
     let point = &segment.points[0];
     assert_eq!(point.elevation, Some(3036.0));
-    assert_eq!(point.point(), Point::new(-118.17100617103279, 36.44834803417325));
+    assert_eq!(
+        point.point(),
+        Point::new(-118.17100617103279, 36.44834803417325)
+    );
     assert_eq!(point.time, DateTime::from_str("2019-08-12T23:45:00Z").ok());
 
     // ensure day 2 tracks are parsed
@@ -313,7 +316,10 @@ fn gpx_reader_read_test_caltopo_export() -> Result<(), Box<dyn Error>> {
     assert_eq!(segment.points.len(), 3);
     let point = &segment.points[2];
     assert_eq!(point.elevation, Some(2923.0));
-    assert_eq!(point.point(), Point::new(-118.33698051050305, 36.49673483334482));
+    assert_eq!(
+        point.point(),
+        Point::new(-118.33698051050305, 36.49673483334482)
+    );
     assert_eq!(point.time, DateTime::from_str("2019-08-13T21:46:00Z").ok());
 
     Ok(())
